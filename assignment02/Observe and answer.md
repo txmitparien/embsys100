@@ -1,20 +1,22 @@
 Week2 Assignment
 
-1.)	a.) The value of the “counter” from the “Locals” window is **0x20000000 (536870912)**.
+1.)	a.) The value of the “counter” from the “Locals” window is **0x80000000 (-2147483648)**.
 
-	  b.) The value of the “counter” in the “Register” window is 0x20000000 (536870912).
+	 b.) The value of the “counter” in the “Register” window is 0x80000000 (-2147483648).
     
-	  c.) There isn’t any set flags for this operation. The reason why there isn’t any set flags is because 
-    there isn’t any Negative Condition (Z), Carry Condition (C), Overflow Condition (V), 
-    Overflow or Saturation Condition (Q), or Greater than or Equal Condition (GE) in this operation.
+	 c.) Negative (N) flag and Overflow (V) flag are set in the APSR. These flags were set because when we
+	incremented the "counter" variable which is a signed integer with a value of 0x7FFFFFFF(2147483647), we
+	turned this variable into a negative number and in doing so, we have flag the Overflow condition as well since.
     
 2.)	a.) The value of “counter” in the *“Locals”* window changed to **0x00000000 (0)**.
 
 	  b.) The APSR set Zero Condition (Z) flag and Carry Condition (C) flag.  
     
-3.)	a.) The value of “counter” in the **“Locals”** window changed to **0x20000000 (536870912)**.
+3.)	a.) The value of “counter” in the **“Locals”** window changed to **0x80000000 (2147483648)**.
 
-	  b.) There isn’t any set flags for this operation.
+	b.) Negative (N) flag and Overflow (V) flag are set in the APSR. Even through, the value is unsigned and the 
+	variable "counter" incremented into positive number but I think the APSR still treats it as the signed number still
+	and it only tracks the bit condition of some of the bits. 
     
 4.)	a.) The value of “counter” in the **“Locals”** window changed to **0x00000000 (0)**.
 
