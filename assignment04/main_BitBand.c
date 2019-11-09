@@ -1,38 +1,56 @@
-int counter = 0;
+#define RCC_BASE 0x40023800
+#define RCC_AHB1ENR (*((unsigned int*)(RCC_BASE + 0x30)))
 
-int main()
+#define GPIOA_BASE 0x40020000
+#define GPIOA_MODER (*((unsigned int*)(GPIOA_BASE + 0x00)))
+#define GPIOA_ODR (*((unsigned int*)(GPIOA_BASE + 0x14)))
+
+#define GPIOA (1<<5)
+
+volatile int counter=0;
+
+void main(void)
 {
-  //enabling the clock
-  // RCC Base Address: 0x40023800
-  //RCC AHB1 peripheral clock enable register (RCC_AHB1ENR)
-  //Address offset: 0x30
-  //Write: 0x1
-  //1. Enable clock to Peripheral
-  *((unsigned int*)0x40023830) = 0x1;
+    
+    // RCC Base Address: 0x40023800
+    // RCC AHB1 peripheral clock enable register (RCC_AHB1ENR)
+    // Address offset: 0x30
+    // Set bit[0] to 1
+    // 1. Enable clock to Peripheral
+    //RCC_AHB1ENR |= 0x1;
+    (*((unsigned int*)(0x42000000 + (0x23830*32) + (0*4)))) = 1;
   
-  //2.Set GPIO to Output
-  *((unsigned int*)0x40020000) = 0xA8000400;
-  
-  //3.Write 1 or 0 to turn on/ off
-  *((unsigned int*)0x40020014) = 0x20;
-  
-  return 0;
+    // GPIOA Base Address: 0x40020000
+    // GPIO port mode register (GPIOx_MODER) (x = A..E and H)
+    // Address offset: 0x00
+    // Set bit[11:10] to 0x01  so --> 0x400 // To enable Port5 as output
+    //GPIOA_MODER |= 0x400;
+    (*((unsigned int*)(0x42000000 + (0x20000*32) + (10*4)))) = 1;
+    // GPIOA Base Address: 0x40020000
+    // GPIO port output data register (GPIOx_ODR) (x = A..E and H)
+    // Address offset: 0x14
+    // Set bit[5] to 1 --> 0x20; // Turn LED ON
+    // Set bit[5] to 0 --> 0x00; // Turn LED OFF
+     
+    while(1)
+    {
+    counter=0;
+
+    while (counter < 1000000)
+    {
+      counter++;
+    }
+    //GPIOA_ODR |= GPIOA;
+    (*((unsigned int*)(0x42000000 + (0x20014*32) + (5*4)))) = 1;
+        
+    counter=0;
+    while (counter < 1000000)
+    {
+      counter++;
+    }
+    //GPIOA_ODR &= ~GPIOA;
+    (*((unsigned int*)(0x42000000 + (0x20014*32) + (5*4)))) = 0;
+
+    }
 }
-
-
-
-//GPIOA Base Address: 0x40020000
-//GPIO port mode register (GPIOx_MODER) (x = A..E and H)
-//Address offset: 0x00
-//Write: 0x400
-
-
-
-//GPIOA Base Address: 0x40020000
-//GPIO port output data register (GPIOx_ODR) (x = A..E and H)
-//Address offset: 0x14
-//Reset value: 0x0000 0000
-//write: 0x20
-
-
 
