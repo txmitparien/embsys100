@@ -10,8 +10,8 @@ void main(void)
 {
   int testNum;
   testNum = endianTest();
-  assert(testNum == -2);        //Big Endian
-  assert(testNum == -1);        //Little Endian
+  assert(testNum == -2);        //Big Endian (Expect to error out here)
+  assert(testNum == -1);        //Little Endian (Expecte error out here)
 }
 
 //This function will not accept any input parameter but shall return
