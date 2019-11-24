@@ -42,9 +42,9 @@ Remark          : This code is created by modified sqrAsm.s.
 /*******************************************************************************
 Function Name   : div2Asm
 Description     : Calls C code to print a string; 
-                  computes the square of its input argument
+                  computes the input argument divided by 2
 C Prototype     : int div2Asm(val)
-                : Where val is the value to calculate it's square
+                : Where val is the value to calculate its value divided by 2
 Parameters      : R0: Address of val
 Return value    : R0
 *******************************************************************************/  
