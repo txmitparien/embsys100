@@ -1,6 +1,7 @@
 /*******************************************************************************
 File name       : delay.s
 Description     : Assembly language function for controlling the user LED
+Modified by     : Thanit Mitparien
 *******************************************************************************/   
 
     PUBLIC delay         // Exports symbols to other modules
