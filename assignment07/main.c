@@ -40,6 +40,6 @@ void main(void)
     
     while(1){
        GPIOA->ODR ^= GPIO_ODR_OD5;      //Toggle LED ON/OFF
-       delay(10000);                     //Delay by Milliseconds
+       delay(2000);                     //Delay by Milliseconds
     }
 }
